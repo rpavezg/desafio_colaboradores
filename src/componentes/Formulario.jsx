@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Button } from "react-bootstrap";
-import { Form } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const Formulario = ({ onSubmit, setAlert }) => {
-    const [colaborador, setColaborador] = useState({
+    const [cdataform, setDataform] = useState({
       nombre: "",
       correo: "",
       edad: "",
@@ -12,12 +12,12 @@ const Formulario = ({ onSubmit, setAlert }) => {
     });
     const handleSubmit = (e) => {
       e.preventDefault();
-      if (
-            colaborador.nombre === "" ||
-            colaborador.correo === "" ||
-            colaborador.edad === "" ||
-            colaborador.cargo === "" ||
-            colaborador.telefono === ""
+      if(
+            dataform.nombre === "" ||
+            dataform.correo === "" ||
+            dataform.edad === "" ||
+            dataform.cargo === "" ||
+            dataform.telefono === ""
       ) {
         setAlert({
           error: true,
@@ -28,7 +28,7 @@ const Formulario = ({ onSubmit, setAlert }) => {
         return;
       }
   
-      onSubmit(colaborador);
+      onSubmit(dataform);
       setAlert({
         error: false,
         msg: "Colaborador agregado exitosamente",
@@ -36,7 +36,7 @@ const Formulario = ({ onSubmit, setAlert }) => {
         backgrouncolor: "lightgreen",
       });
   
-      setColaborador({
+      setDataform({
         nombre: "",
         correo: "",
         edad: "",
@@ -46,9 +46,9 @@ const Formulario = ({ onSubmit, setAlert }) => {
     };
   
     const handleChange = (e) => {
-      const nuevoColaborador = { ...colaborador };
-      nuevoColaborador[e.target.nombre] = e.target.value;
-      setColaborador(nuevoColaborador);
+      const nuevaDataform = { ...Dataform };
+      nuevaDataform[e.target.nombre] = e.target.value;
+      setDataform(nuevoDataform);
       console.log(e.target.nombre, e.target.value);
     };
     return (
@@ -60,7 +60,7 @@ const Formulario = ({ onSubmit, setAlert }) => {
             name="nombre"
             className="my-3"
             onChange={handleChange}
-            value={colaborador.nombre}
+            value={dataform.nombre}
           />
           <Form.Control
             type="text"
@@ -68,15 +68,15 @@ const Formulario = ({ onSubmit, setAlert }) => {
             name="correo"
             className="my-3"
             onChange={handleChange}
-            value={colaborador.correo}
+            value={dataform.correo}
           />
           <Form.Control
-            type="text"
+            type="number"
             className="my-3"
             placeholder="Edad"
             name="edad"
             onChange={handleChange}
-            value={colaborador.edad}
+            value={dataform.edad}
           />
           <Form.Control
             type="text"
@@ -84,15 +84,15 @@ const Formulario = ({ onSubmit, setAlert }) => {
             name="cargo"
             className="my-3"
             onChange={handleChange}
-            value={colaborador.cargo}
+            value={dataform.cargo}
           />
           <Form.Control
-            type="text"
+            type="number"
             placeholder="Telefono"
             name="telefono"
             className="my-3"
             onChange={handleChange}
-            value={colaborador.telefono}
+            value={dataform.telefono}
           />
           <Button variant="primary" type="submit">
             Agregar Colaborador

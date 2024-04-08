@@ -10,20 +10,19 @@ const Listado = ({ colaboradores }) => {
             <th>edad</th>
             <th>cargo</th>
             <th>telefono</th>
-            <th>Editar</th>
-            <th>Borrar</th>
           </tr>
         </thead>
         <tbody>
-          {colaboradores.map((colaborador) => (
-            <tr key={colaborador.id}>
-              <td>{colaborador.nombre}</td>
-              <td>{colaborador.correo}</td>
-              <td>{colaborador.edad}</td>
-              <td>{colaborador.cargo}</td>
-              <td>{colaborador.telefono}</td>
+          {colaboradores.map((dataform) => (
+            <tr key={dataform.id}>
+              <td>{dataform.nombre}</td>
+              <td>{dataform.correo}</td>
+              <td>{dataform.edad}</td>
+              <td>{dataform.cargo}</td>
+              <td>{dataform.telefono}</td>
             </tr>
           ))}
+
         </tbody>
       </Table>
     );
