@@ -1,16 +1,14 @@
-import { useState } from 'react';
-import Listado from './componentes/Listado';
-import { BaseColaboradores } from './assets/BaseColaboradores';
-import './App.css';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import "bootstrap/dist/css/bootstrap.min.css";
-import Alert from './componentes/Alert';
-import Formulario from './componentes/Formulario';
-import Buscador from './componentes/Buscador';
-import MyNavbar from "./assets/componentes/Navbar";
+import { useState } from "react";
+import Listado from "./componentes/Listado"
+import Formulario from "./componentes/Formulario"
+import Buscador from "./componentes/Buscador";
 
-const App = ()=> {
+import Alert from "./componentes/Alert";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {BaseColaboradores} from "./assets/BaseColaboradores"
+import MyNavbar from "./componentes/Navbar";
+
+export default function App() {
   const [colaboradores, setColaboradores] = useState(BaseColaboradores);
   const [alert, setAlert] = useState({
     error: "",
@@ -19,24 +17,24 @@ const App = ()=> {
   });
   const [search, setSearch] = useState("");
 
-  const handleSubmit = (nuevoColaborador) => {
-    const colaboradorFinal = { ...nuevoColaborador, id: Date.now() };
-    setColaboradores([...colaboradores, colaboradorFinal]);
+  const handleSubmit = (nuevaDataform) => {
+    const dataformFinal = { ...nuevaDataform, id: Date.now() };
+    setColaboradores([...colaboradores, dataformFinal]);
   };
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
-
-  const colaboradorFiltradas = colaboradores.filter((colaborador) => {
+  const dataformFiltradas = colaboradores.filter((dataform) => {
     if (
-      colaborador.nombre.toLowerCase().includes(search.toLowerCase()) ||
-      colaborador.correo.toLowerCase().includes(search.toLowerCase()) ||
-      colaborador.cargo.toLowerCase().includes(search.toLowerCase()) 
+      dataform.nombre.toLowerCase().includes(search.toLowerCase()) ||
+      dataform.correo.toLowerCase().includes(search.toLowerCase()) ||
+      dataform.cargo.toLowerCase().includes(search.toLowerCase())
     ) {
       return true;
-   }
-   return false;
+    }
+    return false;
   });
+
   return (
     <main>
       <div style={{ marginBottom: "30px" }}>
@@ -66,6 +64,3 @@ const App = ()=> {
     </main>
   );
 }
-
-
-export default App

@@ -3,27 +3,26 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 const Formulario = ({ onSubmit, setAlert }) => {
-    const [cdataform, setDataform] = useState({
+    const [dataform, setDataform] = useState({
       nombre: "",
       correo: "",
       edad: "",
-      cargo: "",
       telefono: "",
+      cargo: "",
     });
     const handleSubmit = (e) => {
       e.preventDefault();
-      if(
-            dataform.nombre === "" ||
-            dataform.correo === "" ||
-            dataform.edad === "" ||
-            dataform.cargo === "" ||
-            dataform.telefono === ""
+      if (
+        dataform.nombre === "" ||
+        dataform.correo === "" ||
+        dataform.edad === "" ||
+        dataform.telefono === "" ||
+        dataform.cargo === ""
       ) {
         setAlert({
           error: true,
           msg: "Todos los campos son obligatorios",
           color: "danger",
-          backgrouncolor: "pink",
         });
         return;
       }
@@ -31,32 +30,31 @@ const Formulario = ({ onSubmit, setAlert }) => {
       onSubmit(dataform);
       setAlert({
         error: false,
-        msg: "Colaborador agregado exitosamente",
+        msg: "Colaborador agregado con exito",
         color: "success",
-        backgrouncolor: "lightgreen",
       });
   
       setDataform({
         nombre: "",
         correo: "",
         edad: "",
-        cargo: "",
         telefono: "",
+        cargo: "",
       });
     };
   
     const handleChange = (e) => {
-      const nuevaDataform = { ...Dataform };
-      nuevaDataform[e.target.nombre] = e.target.value;
-      setDataform(nuevoDataform);
-      console.log(e.target.nombre, e.target.value);
+      const nuevaDataform = { ...dataform };
+      nuevaDataform[e.target.name] = e.target.value;
+      setDataform(nuevaDataform);
+      console.log(e.target.name, e.target.value);
     };
     return (
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Control
             type="text"
-            placeholder="Nombre"
+            placeholder="nombre"
             name="nombre"
             className="my-3"
             onChange={handleChange}
@@ -64,7 +62,7 @@ const Formulario = ({ onSubmit, setAlert }) => {
           />
           <Form.Control
             type="text"
-            placeholder="Correo"
+            placeholder="correo"
             name="correo"
             className="my-3"
             onChange={handleChange}
@@ -73,14 +71,14 @@ const Formulario = ({ onSubmit, setAlert }) => {
           <Form.Control
             type="number"
             className="my-3"
-            placeholder="Edad"
+            placeholder="edad"
             name="edad"
             onChange={handleChange}
             value={dataform.edad}
           />
           <Form.Control
             type="text"
-            placeholder="Cargo"
+            placeholder="cargo"
             name="cargo"
             className="my-3"
             onChange={handleChange}
@@ -88,14 +86,14 @@ const Formulario = ({ onSubmit, setAlert }) => {
           />
           <Form.Control
             type="number"
-            placeholder="Telefono"
+            placeholder="telefono"
             name="telefono"
             className="my-3"
             onChange={handleChange}
             value={dataform.telefono}
           />
           <Button variant="primary" type="submit">
-            Agregar Colaborador
+            Agregar colaborador
           </Button>
         </Form.Group>
       </Form>
@@ -103,4 +101,3 @@ const Formulario = ({ onSubmit, setAlert }) => {
   };
   
   export default Formulario;
-  
