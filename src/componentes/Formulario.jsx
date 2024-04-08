@@ -1,103 +1,112 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 const Formulario = ({ onSubmit, setAlert }) => {
-    const [dataform, setDataform] = useState({
-      nombre: "",
-      correo: "",
-      edad: "",
-      telefono: "",
-      cargo: "",
+  const [colaborador, setColaborador] = useState({
+    nombre: "",
+    correo: "",
+    edad: "",
+    cargo: "",
+    telefono: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      colaborador.nombre === "" ||
+      colaborador.correo === "" ||
+      colaborador.edad === "" ||
+      colaborador.cargo === "" ||
+      colaborador.telefono === ""
+    ) {
+    setAlert({
+        error: true,
+        msg: "Completa todos los campos!",
+        color: "danger",
     });
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      if (
-        dataform.nombre === "" ||
-        dataform.correo === "" ||
-        dataform.edad === "" ||
-        dataform.telefono === "" ||
-        dataform.cargo === ""
-      ) {
-        setAlert({
-          error: true,
-          msg: "Todos los campos son obligatorios",
-          color: "danger",
-        });
-        return;
-      }
-  
-      onSubmit(dataform);
-      setAlert({
+    return;
+    }
+
+    onSubmit(colaborador);
+    setAlert({
         error: false,
-        msg: "Colaborador agregado con exito",
+        msg: "Colaborador agregado!",
         color: "success",
-      });
-  
-      setDataform({
+    });
+
+    setColaborador({
         nombre: "",
         correo: "",
         edad: "",
-        telefono: "",
         cargo: "",
-      });
-    };
-  
-    const handleChange = (e) => {
-      const nuevaDataform = { ...dataform };
-      nuevaDataform[e.target.name] = e.target.value;
-      setDataform(nuevaDataform);
-      console.log(e.target.name, e.target.value);
-    };
-    return (
+        telefono: "",
+
+    })
+  };
+
+  const handleChange = (e) => {
+    const nuevoColaborador = { ...colaborador };
+    nuevoColaborador[e.target.name] = e.target.value;
+    setColaborador(nuevoColaborador);
+  };
+
+  return (
+    <>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Control
             type="text"
-            placeholder="nombre"
+            placeholder="Nombre"
             name="nombre"
             className="my-3"
             onChange={handleChange}
-            value={dataform.nombre}
+            value={colaborador.nombre}
           />
+
           <Form.Control
-            type="text"
-            placeholder="correo"
+            type="email"
+            placeholder="Correo"
             name="correo"
             className="my-3"
             onChange={handleChange}
-            value={dataform.correo}
+            value={colaborador.correo}
           />
-          <Form.Control
-            type="number"
-            className="my-3"
-            placeholder="edad"
-            name="edad"
-            onChange={handleChange}
-            value={dataform.edad}
-          />
+
           <Form.Control
             type="text"
-            placeholder="cargo"
+            placeholder="Edad"
+            name="edad"
+            className="my-3"
+            onChange={handleChange}
+            value={colaborador.edad}
+          />
+
+          <Form.Control
+            type="text"
+            placeholder="Cargo"
             name="cargo"
             className="my-3"
             onChange={handleChange}
-            value={dataform.cargo}
+            value={colaborador.cargo}
           />
+
           <Form.Control
-            type="number"
-            placeholder="telefono"
+            type="text"
+            placeholder="Telefono"
             name="telefono"
             className="my-3"
             onChange={handleChange}
-            value={dataform.telefono}
+            value={colaborador.telefono}
           />
-          <Button variant="primary" type="submit">
+
+          <Button variant="success" type="submit">
             Agregar colaborador
           </Button>
         </Form.Group>
       </Form>
-    );
-  };
-  
-  export default Formulario;
+    </>
+  );
+};
+
+export default Formulario;
